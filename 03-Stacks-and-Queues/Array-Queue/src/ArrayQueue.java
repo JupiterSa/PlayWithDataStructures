@@ -57,12 +57,13 @@ public class ArrayQueue<E> implements Queue<E>{
         // write your code here
         ArrayQueue<Integer> arrayQueue = new ArrayQueue<>();
 
-        arrayQueue.enQueue(1);
-        arrayQueue.enQueue(2);
-        arrayQueue.enQueue(3);
-        System.out.println(arrayQueue);
-
-        arrayQueue.deQueue();
-        System.out.println(arrayQueue);
+        for (int i = 0; i < 10; i ++) {
+            arrayQueue.enQueue(i);
+            System.out.println(arrayQueue);
+            if (i % 3 == 2) {
+                arrayQueue.deQueue();
+                System.out.println(arrayQueue);
+            }
+        }
     }
 }
