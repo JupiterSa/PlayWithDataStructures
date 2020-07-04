@@ -6,7 +6,7 @@ public class LoopQueueWithoutSize<E> implements Queue<E> {
     private E[] data;
 
     public LoopQueueWithoutSize (int capacity) {
-        data = (E[])new Object[capacity];
+        data = (E[])new Object[capacity + 1];
         front = 0;
         tail = 0;
     }
@@ -53,29 +53,27 @@ public class LoopQueueWithoutSize<E> implements Queue<E> {
         data[tail] = e;
         tail = (tail + 1) % data.length;
     }
+
     @Override
     public E deQueue() {
         if (isEmpty()) {
             throw new IllegalArgumentException("The LoopQueue is empty.");
         }
-
         E ret;
         ret = data[front];
         data[front] = null;
         front = (front + 1) % data.length;
-
         if (getSize() == getCapacity() / 4 && getCapacity() /2 != 0) {
             resize(getCapacity() /2);
         }
-
         return ret;
     }
 
     private void resize (int newCapacity) {
-        E[] newData = (E[])new Object[newCapacity];
+        E[] newData = (E[])new Object[newCapacity + 1];
         int size = getSize();
         for (int i = 0; i < size; i ++) {
-            newData[i] = data[(front+1) % data.length];
+            newData[i] = data[(front + i) % data.length];  //错了注意
         }
         data = newData;
         front = 0;
@@ -90,7 +88,7 @@ public class LoopQueueWithoutSize<E> implements Queue<E> {
             if ((i + 1) % data.length != tail) {
                 res.append(data[i] + ",");
             }else {
-                res.append(data[i] + "] tail");
+                res.append(data[i] + "] tail. Size: " + String.valueOf(getSize()) + " capacity: " + String.valueOf(getCapacity()));
             }
         }
         return res.toString();
@@ -98,7 +96,7 @@ public class LoopQueueWithoutSize<E> implements Queue<E> {
 
     public static void main(String[] args) {
         // write your code here
-        LoopQueue<Integer> loopQueue = new LoopQueue<>();
+        LoopQueueWithoutSize<Integer> loopQueue = new LoopQueueWithoutSize<>();
 
         for (int i = 0; i < 10; i ++) {
             loopQueue.enQueue(i);
