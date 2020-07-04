@@ -30,8 +30,15 @@ public class LoopQueueWithoutSize<E> implements Queue<E> {
 
     @Override
     public int getSize() {
-
-        return 0;
+        int size;
+        if (front <= tail) {
+            size = tail - front;
+        } else {
+            size = data.length + tail - front;
+        }
+        //另一中写法
+        //size = front <= tail ? tail - front : data.length + tail - front;
+        return size;
     }
 
     public int getCapacity () {
@@ -40,17 +47,67 @@ public class LoopQueueWithoutSize<E> implements Queue<E> {
 
     @Override
     public void enQueue(E e) {
-
+        if ((tail + 1) % data.length == front) {
+            resize(getCapacity() * 2);
+        }
+        data[tail] = e;
+        tail = (tail + 1) % data.length;
     }
     @Override
     public E deQueue() {
-        return null;
+        if (isEmpty()) {
+            throw new IllegalArgumentException("The LoopQueue is empty.");
+        }
+
+        E ret;
+        ret = data[front];
+        data[front] = null;
+        front = (front + 1) % data.length;
+
+        if (getSize() == getCapacity() / 4 && getCapacity() /2 != 0) {
+            resize(getCapacity() /2);
+        }
+
+        return ret;
+    }
+
+    private void resize (int newCapacity) {
+        E[] newData = (E[])new Object[newCapacity];
+        int size = getSize();
+        for (int i = 0; i < size; i ++) {
+            newData[i] = data[(front+1) % data.length];
+        }
+        data = newData;
+        front = 0;
+        tail = size;
     }
 
     @Override
     public String toString () {
-        return null;
+        StringBuilder res = new StringBuilder();
+        res.append("LoopQueue : front [");
+        for (int i = front; i != tail ; i = (i + 1) % data.length) {
+            if ((i + 1) % data.length != tail) {
+                res.append(data[i] + ",");
+            }else {
+                res.append(data[i] + "] tail");
+            }
+        }
+        return res.toString();
     }
 
+    public static void main(String[] args) {
+        // write your code here
+        LoopQueue<Integer> loopQueue = new LoopQueue<>();
+
+        for (int i = 0; i < 10; i ++) {
+            loopQueue.enQueue(i);
+            System.out.println(loopQueue);
+            if (i % 3 == 2) {
+                loopQueue.deQueue();
+                System.out.println(loopQueue);
+            }
+        }
+    }
     
 }

@@ -96,7 +96,7 @@ public class LoopQueue<E> implements Queue<E>{
 
         for (int i = front; i != tail; i = (i + 1) % data.length ) {
             String val = String.valueOf(data[i]);
-            if ((i + 1) % data.length != tail) {  //另一种写法i != tail -1
+            if ((i + 1) % data.length != tail) {  //i再挪一位不是tail说明不是最后一个元素
                 res.append( val + ", ");
             }else {
                 res.append(val + "] tail. Size: " + String.valueOf(data[i]) + " capacity: " + String.valueOf(getCapacity()));
