@@ -70,7 +70,7 @@ public class LoopQueueWithoutSize<E> implements Queue<E> {
     }
 
     private void resize (int newCapacity) {
-        E[] newData = (E[])new Object[newCapacity + 1];
+        E[] newData = (E[])new Object[newCapacity + 1]; 
         int size = getSize();
         for (int i = 0; i < size; i ++) {
             newData[i] = data[(front + i) % data.length];  //错了注意
