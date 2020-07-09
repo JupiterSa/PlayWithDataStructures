@@ -44,11 +44,18 @@ public class LinkedListWithDummyHead<E> {
     public String toString() {
         StringBuilder res = new StringBuilder();
         res.append("LinkedList : head ");
-        Node currentNode = dummyHead.next;
-        while (currentNode != null) {
-            res.append(currentNode.e + "-> ");
-            currentNode = currentNode.next;
+
+        //第一种写法
+//        Node currentNode = dummyHead.next;
+//        while (currentNode != null) {
+//            res.append(currentNode.e + "-> ");
+//            currentNode = currentNode.next;
+//        }
+        //第二种写法
+        for (Node current = dummyHead.next; current != null ; current = current.next) {
+            res.append(current.e + "-> ");
         }
+
         res.append("null    size:" + getSize());
         return res.toString();
     }
@@ -83,8 +90,47 @@ public class LinkedListWithDummyHead<E> {
 
 
     //删
+    //删除第index索引位置的元素
+    //思路，将被删除的元素A 的前一个元素P 指向A后一个元素
+    public E remove(int index) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("The index need to be between 0 and size.");
+        }
+
+        Node prev = dummyHead;
+        for (int i = 0; i < index; i ++) {
+            prev = prev.next;
+        }
+        Node retNode = prev.next;
+        prev.next = retNode.next;
+        retNode.next = null;  //!!!!!!!!!!!!!   让retNode指向空！！！！！！！
+
+        size --;
+
+        return retNode.e;
+    }
+
+    public E removeFirst () {
+        return  remove(0);
+    }
+
+    public E removeLast () {
+        return remove(size -1);
+    }
 
     //改
+    //修改第index位置的元素
+    public void set(int index, E e) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("The index need to be between 0 and size.");
+        }
+        //遍历index这个位置，所以起名curr
+        Node current = dummyHead.next;
+        for (int i = 0; i < index; i ++) {
+            current = current.next;
+        }
+        current.e = e;
+    }
 
     //查
     //获得列表中第index位置的元素(0-base)
@@ -93,12 +139,42 @@ public class LinkedListWithDummyHead<E> {
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("The index need to be between 0 and size.");
         }
-        Node current = dummyHead.next;
         //遍历index这个位置，所以起名curr
+        Node current = dummyHead.next;
         for (int i = 0; i < index; i ++) {
             current = current.next;
         }
+
         return current.e;
+    }
+
+    //查找链表中是否有元素e
+    public boolean contains(E e) {
+        Node current = dummyHead.next;
+        //方法一
+//        for (int i = 1; i < size; i ++) {
+//            if ( e.equals(current.e)) {
+//                return true;
+//            }
+//            current = current.next;
+//        }
+//        return false;
+        //方法二
+        while (current.next != null) {
+            if (e.equals(current.e)) {
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
+    }
+
+    public E getFirst () {
+        return get(0);
+    }
+
+    public E getLast () {
+        return get(size - 1);
     }
 
     public static void main(String[] args) {
