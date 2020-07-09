@@ -198,5 +198,4 @@ public class LinkedListWithDummyHead<E> {
         System.out.println(LinkedListWithDummyHead);
 
     }
-
 }
