@@ -42,7 +42,7 @@ public class ArrayStack<E> implements Stack<E> {
     @Override
     public String toString() {
         StringBuilder ret = new StringBuilder();
-        ret.append("Stack : [");
+        ret.append("ArrayStack : [");
         for (int i = 0; i < arr.getSize(); i ++) {
             ret.append(arr.get(i));
             if (i != arr.getSize() - 1) {
@@ -51,5 +51,17 @@ public class ArrayStack<E> implements Stack<E> {
         }
         ret.append(" ] top");
         return ret.toString();
+    }
+
+    public static void main(String[] args) {
+        ArrayStack<Integer> stack = new ArrayStack<Integer>(5);
+        for (int i = 0; i < 5; i ++) {
+            stack.push(i);
+        }
+        System.out.println(stack + " " + String.valueOf(stack.getCapacity()));
+        stack.push(16);
+        System.out.println(stack + " " + String.valueOf(stack.getCapacity()));
+        stack.pop();
+        System.out.println(stack + " " + String.valueOf(stack.getCapacity()));
     }
 }
