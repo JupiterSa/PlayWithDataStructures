@@ -12,11 +12,8 @@ public class SumLinkedListByRecursion {
 
     public static void main(String[] args) {
         int[] array = {5,4,3};
-
         ListNode head = new ListNode(array);
         System.out.println("ListNode:" + head);
-
         System.out.println("Sum:" + sum(head));
     }
-
 }

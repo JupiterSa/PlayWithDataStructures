@@ -9,18 +9,13 @@ public class SumArrayByRecursion {
      *  Sum(arr[n-1...n-1]) = arr[n-1] + Sum()
      */
 
-
-
     //该方法是给用户设计的，输入数组，返回和
     public static int sum (int[] arrs) {
-
         if (arrs == null) {
             throw new IllegalArgumentException("The array is illegal");
         }
-
         //递归体
         return sumRecursion(arrs, 0); //递归初始调用，递归从数组index=0开始
-
     }
 
     //递归方法总结： 从哪里开始递归求和  array[left .... n]
@@ -47,7 +42,6 @@ public class SumArrayByRecursion {
      *  从上往下是递
      *  从下往上是归 一层层继续返回，最后回到第0层
      */
-
     public static void main(String[] args) {
         // 测试数组递归方法
         int[] array = {5,4,3,2,1};
@@ -56,7 +50,6 @@ public class SumArrayByRecursion {
         int[] array1 = {};
         System.out.println(sum(array1));
     }
-
 }
 
 

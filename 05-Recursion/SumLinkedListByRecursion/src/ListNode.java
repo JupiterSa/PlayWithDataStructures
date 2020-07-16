@@ -2,7 +2,6 @@ public class ListNode {
     int val;
     ListNode next;
     ListNode(int x) { val = x; }
-
     //自己测试代码，需要调用solution中的removeElements(ListNode head, int val)
     //所以我们自己构造出 ListNode head！！！
     //新创建一个构造函数
@@ -21,7 +20,6 @@ public class ListNode {
         }
 
     }
-
     //！！！以当前节点为头节点的链表信息字符串！！！！！！！！！
     @Override
     public String toString() {
