@@ -13,11 +13,14 @@
 public class Solution1 {
 
     private int Count(ListNode listNode,int value) {
-        int count = 0;
+
         if (listNode == null) {
             throw new IllegalArgumentException("The ListNode can not be empty.");
         }
 
+        int count = 0;
+
+        //方法一
         ListNode current = listNode;
         while (current != null) {
             if (current.value == value) {
@@ -25,6 +28,15 @@ public class Solution1 {
             }
             current = current.next;
         }
+
+        //方法二
+//        for (ListNode current = listNode ; current != null; current = current.next) {
+//            if (current.value == value) {
+//                count ++;
+//            }
+//            current = current.next;
+//        }
+
         return count;
     }
 
