@@ -1,6 +1,6 @@
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         BinarySearchTreeBasic<Integer> bst = new BinarySearchTreeBasic<>();
 
@@ -13,10 +13,10 @@ public class Main {
         bst.preOrderTraverse();
         System.out.println();
         System.out.println(bst);
-
-
+        
         bst.inOrderTraverse();
         System.out.println();
         System.out.println(bst);
+
     }
 }
